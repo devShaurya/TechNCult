@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TechNCult</string>
+    <string name="cult">Cultural Events</string>
+    <string name="tech">Tech Events</string>
 </resources>
