@@ -7,11 +7,11 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/techcouncil"
-            android:title="Technical Council"
+            android:title="Technical Clubs"
             />
         <item
             android:id="@+id/cultcouncil"
-            android:title="Cultural Council"/>
+            android:title="Cultural Clubs"/>
         <item
             android:id="@+id/notification"
             android:title="Notifications"
