@@ -1,37 +1,65 @@
 package com.example.techncult;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import java.util.List;
-
 public class TabPagerAdapter extends FragmentPagerAdapter {
-    List<Fragment> fragmentList;
-    List<String> fragmentTitle;
-    public TabPagerAdapter(FragmentManager fm,List<Fragment> fragmentList,
-                           List<String> fragmentTitle) {
+    int tech;
+
+    public TabPagerAdapter(FragmentManager fm,int tech) {
         super(fm);
-        this.fragmentList=fragmentList;
-        this.fragmentTitle=fragmentTitle;
+        this.tech=tech;
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return fragmentTitle.get(position);
+        switch (position){
+            case 0:
+                return "EVENTS";
+            case 1:
+                return "Council Info";
+            case 2:
+                return "Past Events";
+            case 3:
+                return "Important";
+        }
+
+        return null;
     }
 
     @Override
     public Fragment getItem(int i) {
-        return fragmentList.get(i);
+        Bundle bundle=new Bundle();
+        bundle.putInt("tech",tech);
+        switch (i){
+            case 0:
+                Events events=new Events();
 
+                events.setArguments(bundle);
+                return events;
+            case 1:
+                Councilinfo councilinfo=new Councilinfo();
+
+                councilinfo.setArguments(bundle);
+                return councilinfo;
+            case 2:
+                PastEvents pastEvents=new PastEvents();
+
+                pastEvents.setArguments(bundle);
+                return pastEvents;
+            case 3:
+                return new Important();
+        }
+        return null;
     }
 
     @Override
     public int getCount() {
-        return fragmentList.size();
+        return 4;
     }
 
 }

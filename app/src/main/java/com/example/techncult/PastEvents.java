@@ -1,5 +1,6 @@
 package com.example.techncult;
 
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,26 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class Events extends Fragment {
-    int tech;
-
-    public Events(){
-
+public class PastEvents extends Fragment {
+    public PastEvents() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.events_fragment,container,false);
-
+        View view=inflater.inflate(R.layout.pastevents_fragment,container,false);
         Bundle bundle=getArguments();
-        tech=bundle.getInt("tech");
-        TextView ev=view.findViewById(R.id.events);
+        int tech=bundle.getInt("tech");
+        TextView past=view.findViewById(R.id.past);
         if(tech==0){
-            ev.setText("tech evnts");
+            past.setText("tech evnts");
         }else{
-            ev.setText("Cult events");
+            past.setText("Cult events");
         }
+
         return view;
     }
 }

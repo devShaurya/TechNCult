@@ -4,14 +4,11 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.LinearLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -39,39 +36,23 @@ public class MainActivity extends AppCompatActivity {
         drawable.setSize(2,1);
         linearLayout.setDividerDrawable(drawable);
         linearLayout.setDividerPadding(2);
+
+        tabPagerAdapter=new TabPagerAdapter(getSupportFragmentManager(),0);
+        viewPager.setAdapter(tabPagerAdapter);
+        bottomtabLayout.setupWithViewPager(viewPager);
+
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getText()=="Technical Council"){
-                    List<Fragment> fragmentListbottom=new ArrayList<>();
-                    fragmentListbottom.add(new Events());
-                    fragmentListbottom.add(new Councilinfo());
-                    fragmentListbottom.add(new PastEvents());
-                    List<String> fragmentTitle=new ArrayList<>();
-                    fragmentTitle.add("EVENTS");
-                    fragmentTitle.add("Council Info");
-                    fragmentTitle.add("Past Events");
-                    fragmentTitle.add();
-                    tabPagerAdapter=new TabPagerAdapter(getSupportFragmentManager(),fragmentListbottom,
-                            fragmentTitle);
-                    viewPager.setAdapter(tabPagerAdapter);
-                    bottomtabLayout.setupWithViewPager(viewPager);
-                }else{
-                    List<Fragment> fragmentListbottom=new ArrayList<>();
-                    fragmentListbottom.add(new Events());
-                    fragmentListbottom.add(new Councilinfo());
-                    fragmentListbottom.add(new PastEvents());
-                    List<String> fragmentTitle=new ArrayList<>();
-                    fragmentTitle.add("EVENTS");
-                    fragmentTitle.add("Council Info");
-                    fragmentTitle.add("Past Events");
-                    fragmentTitle.add();
-                    tabPagerAdapter=new TabPagerAdapter(getSupportFragmentManager(),fragmentListbottom,
-                            fragmentTitle);
-                    viewPager.setAdapter(tabPagerAdapter);
-                    bottomtabLayout.setupWithViewPager(viewPager);
-
+                int tech=1;
+                Log.d("msg",tab.getText().toString());
+                if(tab.getText().toString().equals("Technical Council")){
+                    tech=0;
                 }
+
+                TabPagerAdapter tabPagerAdapter2=new TabPagerAdapter(getSupportFragmentManager(),tech);
+                viewPager.setAdapter(tabPagerAdapter2);
+                bottomtabLayout.setupWithViewPager(viewPager);
 
             }
 
