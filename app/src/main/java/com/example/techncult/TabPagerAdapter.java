@@ -5,37 +5,32 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.List;
+
 public class TabPagerAdapter extends FragmentPagerAdapter {
-    public TabPagerAdapter(FragmentManager fm) {
+    List<Fragment> fragmentList;
+    List<String> stringTitle;
+    public TabPagerAdapter(FragmentManager fm, List<Fragment> fragmentList,
+              List<String> stringTitle  ) {
         super(fm);
+        this.fragmentList=fragmentList;
+        this.stringTitle=stringTitle;
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position){
-            case 0:
-                return "Tech Events";
-            case 1:
-                return  "Cultural Events";
-        }
-        return null;
+        return stringTitle.get(position);
     }
 
     @Override
     public Fragment getItem(int i) {
-        switch (i){
-            case 0:
-                return new Technical();
-            case 1:
-                return new Cultural();
-        }
-        return null;
+        return fragmentList.get(i);
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return fragmentList.size();
     }
 
 }

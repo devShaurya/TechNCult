@@ -2,4 +2,6 @@
     <string name="app_name">TechNCult</string>
     <string name="cult">Cultural Events</string>
     <string name="tech">Tech Events</string>
+    <string name="opnDrw">Open Drawer</string>
+    <string name="clsDrw">Close Drawer</string>
 </resources>
