@@ -107,12 +107,12 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.techcouncil:
                         intent=new Intent(MainActivity.this,CouncilActivity.class);
-                        intent.putExtra("Tech",1);
+                        intent.putExtra("Council","Tech Council");
                         startActivity(intent);
                         break;
                     case R.id.cultcouncil:
                         intent=new Intent(MainActivity.this,CouncilActivity.class);
-                        intent.putExtra("Tech",0);
+                        intent.putExtra("Council","Cult Council");
                         startActivity(intent);
                         break;
                     case R.id.website:

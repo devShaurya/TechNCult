@@ -18,7 +18,7 @@
             />
         <activity
             android:name=".CouncilActivity"
-            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             />
         <activity
             android:name=".MainActivity"
