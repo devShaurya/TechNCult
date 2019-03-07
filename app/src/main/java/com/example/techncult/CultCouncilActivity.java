@@ -14,8 +14,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -27,7 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CultCouncilActivity extends AppCompatActivity {
-    TextView clubName,clubInfo;
+    TextView clubName,clubInfo,contact_name,contact_email,contact_position,contact_number;
+    ImageView contact_photo;
     RecyclerView recyclerView;
     FirebaseFirestore db;
     Intent intent;
@@ -47,6 +50,11 @@ public class CultCouncilActivity extends AppCompatActivity {
 
         db=FirebaseFirestore.getInstance();
         clubInfo=findViewById(R.id.clubInfo);
+        contact_name=findViewById(R.id.contact_name);
+        contact_number=findViewById(R.id.contact_number);
+        contact_email=findViewById(R.id.contact_email);
+        contact_position=findViewById(R.id.contact_position);
+        contact_photo=findViewById(R.id.contact_photo);
         toolbar=findViewById(R.id.toolbar_council);
         clubName=findViewById(R.id.council_name);
         recyclerView=findViewById(R.id.club_recycler);
@@ -94,7 +102,12 @@ public class CultCouncilActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         List<DocumentSnapshot> documentSnapshots=task.getResult().getDocuments();
                         clubInfo.setText((CharSequence) documentSnapshots.get(0).get("info"));
-
+                        contact_email.setText((CharSequence) documentSnapshots.get(0).get("email"));
+                        contact_position.setText((CharSequence) documentSnapshots.get(0).get("position"));
+                        contact_name.setText((CharSequence) documentSnapshots.get(0).get("name"));
+                        Glide.with(CultCouncilActivity.this).load(
+                                Uri.parse(String.valueOf(documentSnapshots.get(0).get("photo"))))
+                                .into(contact_photo);
                     }
                 }
         );
