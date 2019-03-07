@@ -106,12 +106,12 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
                 switch (menuItem.getItemId()){
                     case R.id.techcouncil:
-                        intent=new Intent(MainActivity.this,CouncilActivity.class);
+                        intent=new Intent(MainActivity.this, TechCouncilActivity.class);
                         intent.putExtra("Council","Tech Council");
                         startActivity(intent);
                         break;
                     case R.id.cultcouncil:
-                        intent=new Intent(MainActivity.this,CouncilActivity.class);
+                        intent=new Intent(MainActivity.this, CultCouncilActivity.class);
                         intent.putExtra("Council","Cult Council");
                         startActivity(intent);
                         break;
