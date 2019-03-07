@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -23,10 +22,8 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -34,10 +31,9 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     CollapsingToolbarLayout collapsingToolbarLayout;
     TabLayout tabLayout;
-    List<Fragment> fragmentList;
-    List<String> stringTitle;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    FrameLayout frameLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,23 +45,17 @@ public class MainActivity extends AppCompatActivity {
         tabLayout=findViewById(R.id.tabLayout);
         viewPager=findViewById(R.id.viewPager);
         collapsingToolbarLayout=findViewById(R.id.collapsing);
-        fragmentList=new ArrayList<Fragment>(){
-            {
-                add(new Technical());
-                add(new Cultural());
-            }
-        };
-        stringTitle=new ArrayList<String>(){
-            {
-                add("Technical Events");
-                add("Cultural Events");
-            }
-        };
-        tabPagerAdapter=new TabPagerAdapter(getSupportFragmentManager(),fragmentList,stringTitle);
+
+        tabPagerAdapter=new TabPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(tabPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        setSupportActionBar(toolbar);
 
+        tabPagerAdapter.addFragment(0,new Technical(),"Tech Events");
+        tabPagerAdapter.notifyDataSetChanged();
+        tabPagerAdapter.addFragment(1,new Cultural(),"Cult Events");
+        tabPagerAdapter.notifyDataSetChanged();
+
+        setSupportActionBar(toolbar);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.opnDrw, R.string.clsDrw);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -105,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Intent intent;
                 switch (menuItem.getItemId()){
+                    case R.id.home:
+                        break;
                     case R.id.techcouncil:
                         intent=new Intent(MainActivity.this,CouncilActivity.class);
                         intent.putExtra("Council","Tech Council");
@@ -124,8 +116,12 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.dev:
-                        intent=new Intent(MainActivity.this,Developers.class);
-                        startActivity(intent);
+                        tabPagerAdapter.removeFragment(1);
+                        tabPagerAdapter.removeFragment(0);
+                        tabPagerAdapter.notifyDataSetChanged();
+                        tabPagerAdapter.addFragment(0,new Developers(),"developers");
+
+                        viewPager.setAdapter(tabPagerAdapter);
                         break;
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -133,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
 
 

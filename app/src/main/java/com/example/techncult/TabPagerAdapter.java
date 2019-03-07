@@ -5,16 +5,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TabPagerAdapter extends FragmentPagerAdapter {
-    List<Fragment> fragmentList;
-    List<String> stringTitle;
-    public TabPagerAdapter(FragmentManager fm, List<Fragment> fragmentList,
-              List<String> stringTitle  ) {
+    List<Fragment> fragmentList=new ArrayList<>();
+    List<String> stringTitle=new ArrayList<>();
+    public TabPagerAdapter(FragmentManager fm ) {
         super(fm);
-        this.fragmentList=fragmentList;
-        this.stringTitle=stringTitle;
+
     }
 
     @Nullable
@@ -33,4 +32,12 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
         return fragmentList.size();
     }
 
+    public void addFragment(int position,Fragment fragment,String title){
+        fragmentList.add(position,fragment);
+        stringTitle.add(position,title);
+    }
+    public void removeFragment(int pos){
+        fragmentList.remove(pos);
+        stringTitle.remove(pos);
+    }
 }

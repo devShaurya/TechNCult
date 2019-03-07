@@ -12,10 +12,7 @@
         <activity android:name=".Notification"
             android:parentActivityName=".MainActivity"
             ></activity>
-        <activity
-            android:name=".Developers"
-            android:parentActivityName=".MainActivity"
-            />
+
         <activity
             android:name=".CouncilActivity"
             android:theme="@style/AppTheme.NoActionBar"
