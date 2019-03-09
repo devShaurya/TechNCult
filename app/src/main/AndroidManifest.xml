@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CultCouncilActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".EventDesc"></activity>
+        <activity
+            android:name=".CultCouncilActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Notification"
             android:parentActivityName=".MainActivity" />
