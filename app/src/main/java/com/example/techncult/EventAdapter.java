@@ -55,6 +55,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(context,EventDesc.class);
+                intent.putExtra("info",event.getInfo());
                 intent.putExtra("venue",event.getVenue());
                 intent.putExtra("title",event.getTitle());
                 intent.putExtra("photo",event.getPhoto());
